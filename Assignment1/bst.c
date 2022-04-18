@@ -5,48 +5,54 @@
 #include "stack.h"
 
 //To initialise the tree
-void initBST(Treenode **root){
-    *root = NULL;
+void init_bst(bst *t){
+    *t = NULL;
+    return;
 }
 
 //Inserting node recursively
-Treenode* insertNode(Treenode* root, int mis, char name[]){
-    if(root == NULL){
-        Treenode* newnode = (Treenode *)malloc(sizeof(Treenode));
-        newnode -> mis = mis;
-        newnode -> name = (char *)malloc(strlen(name));
-		strcpy(newnode -> name, name);
-		newnode -> left = newnode -> right = NULL;
-		return newnode; 
+void insertNode(bst *t, int mis, char name[]){
+    node *nn;
+    nn = (node *) malloc(sizeof(node));
+    nn -> left = NULL;
+    nn -> right = NULL;
+    nn -> mis = mis;
+    nn -> name = (char *)malloc(strlen(name));
+	strcpy(nn -> name, name); 
+     
+    // Tree empty condition
+    if(*t == NULL){
+        *t = nn;
+        return;
     }
 
-    if(root -> mis > mis){
-        root -> left = insertNode(root->left, mis, name);
+    if((*t) -> mis > mis){
+        insertNode(&((*t) -> left), mis, name);
     }
 
-    else if(root -> mis < mis){
-        root -> right = insertNode(root->right, mis, name);
+    if((*t) -> mis < mis){
+        insertNode(&((*t) -> right), mis, name);
     }
 
-    return root;
+    return;
 }
 
 //Inorder Traversal for checking
-void inorder(Treenode* root){
-
-    if (root != NULL) {
-        inorder(root->left);
-        printf("%d - %s\n", root->mis, root->name);
-        inorder(root->right);
+void inorder(bst t){
+    if(!t){
+        return;
     }
+    inorder(t -> left);
+    printf("%d - %s\n", t->mis, t->name);
+    inorder(t -> right);
 }
 
 //Remove node from a tree
-Treenode* removeNode(Treenode* root, int key){
-    Treenode *p;    //Pointer for finding the node to be deleted
-    Treenode *q;    //Pointer to find its parent
-    Treenode *r;
-    Treenode *rp;
+bst removeNode(bst root, int key){
+    bst p;    //Pointer for finding the node to be deleted
+    bst q;    //Pointer to find its parent
+    bst r;
+    bst rp;
     p = root;
 
     //Checking if tree is empty
@@ -150,30 +156,30 @@ Treenode* removeNode(Treenode* root, int key){
 }
 
 //Search recursively a tree
-Treenode* search(Treenode* root, int mis){
+node* search(bst t, int mis){
 
-    if (root == NULL || root->mis == mis)
-       return root;
+    if (t == NULL || t->mis == mis)
+       return t;
     
-    if (root->mis < mis)
-       return search(root->right, mis);
+    if (t->mis < mis)
+       return search(t->right, mis);
  
-    return search(root->left, mis);
+    return search(t->left, mis);
 }
 
 //Destroy Tree
-void Destroy_Tree(Treenode* root){
+void Destroy_Tree(bst t){
 
-    if(root==NULL)
+    if(t==NULL)
         return;
 
-    Destroy_Tree(root->left);
-    Destroy_Tree(root->right);
-    free(root);
+    Destroy_Tree(t->left);
+    Destroy_Tree(t->right);
+    free(t);
 }
 
 //Postorder iterative traversal
-void postOrderIterative(Treenode* root)
+void postOrderIterative(node* root)
 {
     // Check for empty tree
     if (root == NULL)
@@ -211,7 +217,7 @@ void postOrderIterative(Treenode* root)
 }
 
 //Display node at ith level
-void Display_Level(Treenode *root, int level){
+void Display_Level(node *root, int level){
         if(root == NULL){
             return ;
         }

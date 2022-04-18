@@ -3,18 +3,18 @@
 #include "bst.h"
 
 int main(){
-    Treenode *root;
-    initBST(&root);
+    bst t1;
+    init_bst(&t1);
     
-    root = insertNode(root, 7, "Prerna");
-    insertNode(root, 20, "Abc");
-    insertNode(root, 5, "pqr");
-    insertNode(root, 15, "john");
-    insertNode(root, 10, "jack");
-    insertNode(root, 4, "harry");
-    insertNode(root, 33, "riya");
-    insertNode(root, 2, "ghi");
-    //insertNode(root, 25, "jessy");
+    insertNode(&t1, 7, "Prerna");
+    insertNode(&t1, 20, "Abc");
+    insertNode(&t1, 5, "pqr");
+    insertNode(&t1, 15, "john");
+    insertNode(&t1, 10, "jack");
+    insertNode(&t1, 4, "harry");
+    insertNode(&t1, 33, "riya");
+    insertNode(&t1, 2, "ghi");
+    //insertNode(t1, 25, "jessy");
     
     int option;
     printf("Enter following options to perform operations on a tree\n");
@@ -38,12 +38,7 @@ int main(){
 			char name[20];
 			printf("Enter name - ");
 			scanf("%s",name); 
-			if(root==NULL){
-				root = insertNode(root, mis, name);
-			}
-			else{
-				insertNode(root, mis, name);
-			}
+			insertNode(&t1, mis, name);
 			
    //root = insertNode(root, 7, "Prerna");
     //insertNode(root, 20, "Abc");
@@ -60,9 +55,9 @@ int main(){
 			int key;
 			printf("Enter mis to be deleted - ");
 			scanf("%d",&key);
-			root = removeNode(root,key);
+			t1 = removeNode(t1,key);
 			printf("Now tree is - \n");
-			inorder(root);
+			inorder(t1);
    //Removing nodes
     //printf("Removing nodes - ");
     //root = removeNode(root, 85);          //Key is not there
@@ -76,7 +71,7 @@ int main(){
 			int key;
 			printf("Enter mis to be searched - ");
 			scanf("%d",&key);
-			Treenode *answer = search(root, key);
+			node *answer = search(t1, key);
     			if(answer != NULL){
 		    		printf("Found\n");
 		    	}
@@ -86,7 +81,7 @@ int main(){
 		}
 		
 		if(option == 4){
-			postOrderIterative(root);
+			postOrderIterative(t1);
 			printf("\n");	
 		}
 		
@@ -94,15 +89,15 @@ int main(){
 			int level;
 			printf("Enter level-");
 			scanf("%d",&level);
-			Display_Level(root, level);
+			Display_Level(t1, level);
 		}
 		
 		if(option == 6){
-			Destroy_Tree(root); 
+			Destroy_Tree(t1); 
 		}
 		
 		if(option == 7){
-			inorder(root);
+			inorder(t1);
 		}
 		
 		if(option == -1){

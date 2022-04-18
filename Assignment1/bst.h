@@ -1,21 +1,22 @@
 #include<stdlib.h>
 
 //Structure for node of tree
-typedef struct Treenode{
+typedef struct node{
     int mis;
     char *name;
-    struct Treenode *left;
-    struct Treenode *right;
-}Treenode;
+    struct node *left;
+    struct node *right;
+}node;
 
+typedef node *bst;
 
 //Tree functions
-void initBST(Treenode **root);
-Treenode* insertNode(Treenode* root, int mis, char name[]);
-Treenode* search(Treenode* root, int mis);
-void Destroy_Tree(Treenode* root);
-void inorder(Treenode* root);
-Treenode* removeNode(Treenode* root, int key);
-void postOrderIterative(Treenode* root);
-void Display_Level(Treenode *root, int level);
+void init_bst(bst *t);
+void insertNode(bst *t, int mis, char name[]);
+node* search(bst t, int mis);
+void Destroy_Tree(node* root);
+void inorder(bst t);
+node* removeNode(node* root, int key);
+void postOrderIterative(node* root);
+void Display_Level(node *root, int level);
 

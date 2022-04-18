@@ -5,7 +5,7 @@ struct Stack
 {
     int size;
     int top;
-    struct Treenode* *array;
+    struct node* *array;
 };
 
 
@@ -13,6 +13,6 @@ struct Stack
 struct Stack* createStack(int size);
 int isFull(struct Stack* stack);
 int isEmpty(struct Stack* stack);
-void push(struct Stack* stack, Treenode* node);
-Treenode* pop(struct Stack* stack);
-Treenode* peek(struct Stack* stack);
+void push(struct Stack* stack, node* node);
+node* pop(struct Stack* stack);
+node* peek(struct Stack* stack);
