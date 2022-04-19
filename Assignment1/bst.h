@@ -14,7 +14,7 @@ typedef node *bst;
 void init_bst(bst *t);
 void insertNode(bst *t, int mis, char name[]);
 node* search(bst t, int mis);
-void Destroy_Tree(node* root);
+void Destroy_Tree(bst *t);
 void inorder(bst t);
 node* removeNode(node* root, int key);
 void postOrderIterative(node* root);
