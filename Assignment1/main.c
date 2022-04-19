@@ -93,7 +93,7 @@ int main(){
 		}
 		
 		if(option == 6){
-			Destroy_Tree(t1); 
+			Destroy_Tree(&t1); 
 		}
 		
 		if(option == 7){
