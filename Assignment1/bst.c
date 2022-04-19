@@ -168,14 +168,17 @@ node* search(bst t, int mis){
 }
 
 //Destroy Tree
-void Destroy_Tree(bst t){
+void Destroy_Tree(bst *t){
 
-    if(t==NULL)
+    if(*t==NULL)
         return;
 
-    Destroy_Tree(t->left);
-    Destroy_Tree(t->right);
-    free(t);
+    Destroy_Tree(&((*t)->left));
+    (*t)->left = NULL;
+    Destroy_Tree(&((*t)->right));
+    (*t)->right = NULL;
+    free(*t);
+    (*t) = NULL;
 }
 
 //Postorder iterative traversal
