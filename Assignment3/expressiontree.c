@@ -84,32 +84,32 @@ void inorder(et t){
     inorder(t->right);
 }
 
-void compute(et t){
-    if(t==NULL){
+void compute(et *t){
+    if(*t==NULL){
         return;
     }
-    if(t->left && t->right && (t->left->left==NULL && t->left->right==NULL) && (t->right->left==NULL && t->right->right==NULL)){
-        int a = '9' - t->left->o;
-        int b = '9' - t->right->o;
-        if(t->o=='+'){
-            int c = a+b;
-            t->o= '0' + c;
+    if((*t)->left && (*t)->right && ((*t)->left->left==NULL && (*t)->left->right==NULL) && ((*t)->right->left==NULL && (*t)->right->right==NULL)){
+        int a = (*t)->left->o - '0';
+        int b = (*t)->right->o - '0';
+        int c;
+        if((*t)->o=='+'){
+            c = a+b;
         }
-        if(t->o=='-'){
-            int c = a-b;
-            t->o= '0' + c;
+        if((*t)->o=='-'){
+            c = a-b;
         }
-        if(t->o=='*'){
-            int c = a*b;
-            t->o= '0' + c;
+        if((*t)->o=='*'){
+            c = a*b;
         }
-        if(t->o=='/'){
-            int c = a/b;
-            t->o= '0' + c;
+        if((*t)->o=='/'){
+            c = a/b;
         }
-        t->left == NULL;
-        t->right == NULL;
+        (*t) -> left = NULL;
+        (*t) -> right = NULL;
+        (*t) -> o = '0' + c;
+        printf("\n");
+        return;
     }
-    compute(t->left);
-    compute(t->right);
+    compute(&((*t)->left));
+    compute(&((*t)->right));
 }

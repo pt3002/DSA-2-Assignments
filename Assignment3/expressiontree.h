@@ -16,4 +16,4 @@ void validation_leaves(et t, int *leaves, int *index);
 
 void validation_nodes(et t, int *nodes, int *k);
 
-void compute(et t);
+void compute(et *t);

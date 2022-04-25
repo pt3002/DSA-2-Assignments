@@ -6,7 +6,7 @@
 #include <string.h>
 
 int main(){
-    char exp[] = "((1+2)*(3-(4/5)))";
+    char exp[] = "((1+2)*(3-(8/4)))";
     printf("Postfix expression\n");
     infixToPostfix(exp);
     printf("\n");
@@ -47,11 +47,18 @@ int main(){
         printf("\n");
         printf("Inorder traversal of expression tree - \n");
         inorder(t1);
-        compute(t1);
+        printf("\n\n");
+        printf("Computation - ");
+        while(t1->left!=NULL && t1->right!=NULL){
+            compute(&t1);
+            inorder(t1);
+        }
+        printf("\n\n");
+        printf("Final Answer - \n");
         inorder(t1);
+        printf("\n");
     }
 
-    
-    
+
     return 0;
 }
