@@ -63,4 +63,5 @@ int infixToPostfix(char* exp){
  
     exp[++k] = '\0';
     printf("%s", exp);
+    printf("\n");
 }
