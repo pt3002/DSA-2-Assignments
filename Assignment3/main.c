@@ -6,7 +6,9 @@
 #include <string.h>
 
 int main(){
-    char exp[] = "((1+2)*(3-(8/4)))";
+    //char exp[] = "((1+2)*(3-(8/4)))";                     //Answer - 3
+    //char exp[] = "1+2+3+2";                               //Answer - 8
+    char exp[] = "2*1+3*2";                                 //Answer - 8
     printf("Postfix expression\n");
     infixToPostfix(exp);
     printf("\n");
