@@ -75,66 +75,67 @@ int main(){
 
     //Initialize avl tree
      initAVL(&t1);
-    while(1){
-        char *month;
-        month = (char *)malloc(sizeof(char)*20);
-		printf("Enter name or none to exit- ");
-		scanf("%s",month);
-        if(month[0]=='n'){
-            break;
-        }
-        else{
-            int x = monthfind(month);
-            printf("Month - %s -- %d\n",month,x);
-            insertNode(&t1, x);
-            afterinsert(&t1 ,x);
-            inorder(t1);
-            printf("\n");
-        }
-    }
-    while(1){
-        int i; 
-        printf("Do you want to delete any node ? otherwise enter 0 - ");
-        scanf("%d",&i);
-        if(i ==0){
-            break;
-        }
-        else{
-            t1 = removeNode(t1, i);
+    // while(1){
+    //     char *month;
+    //     month = (char *)malloc(sizeof(char)*20);
+	// 	printf("Enter name or none to exit- ");
+	// 	scanf("%s",month);
+    //     if(month[0]=='n'){
+    //         break;
+    //     }
+    //     else{
+    //         int x = monthfind(month);
+    //         printf("Month - %s -- %d\n",month,x);
+    //         insertNode(&t1, x);
+    //         afterinsert(&t1 ,x);
+    //         inorder(t1);
+    //         printf("\n");
+    //     }
+    // }
+    // while(1){
+    //     int i; 
+    //     printf("Do you want to delete any node ? otherwise enter 0 - ");
+    //     scanf("%d",&i);
+    //     if(i ==0){
+    //         break;
+    //     }
+    //     else{
+    //         t1 = removeNode(t1, i);
             
-        }
-    }
+    //     }
+    // }
 
     //Add new node
-    // insertNode(&t1, 50);
-    // afterinsert(&t1, 50);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 40);
-    // afterinsert(&t1, 40);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 60);
-    // afterinsert(&t1, 60);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 30);
-    // afterinsert(&t1, 30);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 45);
-    // afterinsert(&t1, 45);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 55);
-    // afterinsert(&t1, 55);
-    // inorder(t1);
-    // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 10);
-    // afterinsert(&t1, 10);
-    // inorder(t1);
-    // t1 = removeNode(t1, 55);
-    // inorder(t1);
+    insertNode(&t1, 50);
+    afterinsert(&t1, 50);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 40);
+    afterinsert(&t1, 40);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 60);
+    afterinsert(&t1, 60);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 30);
+    afterinsert(&t1, 30);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 45);
+    afterinsert(&t1, 45);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 55);
+    afterinsert(&t1, 55);
+    inorder(t1);
+    printf("|||||||||||||||||||||||||||||||||||||\n");
+    insertNode(&t1, 10);
+    afterinsert(&t1, 10);
+    inorder(t1);
+    printf("Removal\n");
+    t1 = removeNode(t1, 50);
+    inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
     // insertNode(&t1, 8);
     // afterinsert(&t1, 8);

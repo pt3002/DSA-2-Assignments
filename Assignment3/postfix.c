@@ -39,6 +39,7 @@ int infixToPostfix(char* exp){
     {
         if(isOperand(exp[i])){
                 ans[++k] = exp[i];
+                ans[++k] = ' ';
         }
         else if(exp[i] == '(')
             push(st, exp[i]);

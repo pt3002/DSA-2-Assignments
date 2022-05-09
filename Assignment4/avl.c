@@ -320,15 +320,31 @@ avl removeNode(avl root, int key){
                 printf("Imbalanced Node - %d\n", pp -> data);
                 avl child;
                 child = pp -> left;
-                // //LR rotation
+                // //LL rotation
                 if(child -> bf >= 0){
+                    printf("LL rotation\n");
+                    LL(&(pp), &root);
+                }
+                //LR rotation
+                else{
                     printf("LR rotation\n");
                     LR(&(pp), &root);
                 }
-                // //LL rotation
-                // else{
-                //     LL(&(pp), &root);
-                // }
+            }
+            else if(pp -> bf < -1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> right;
+                // //RL rotation
+                if(child -> bf >= 0){
+                    printf("RL rotation\n");
+                    RL(&(pp), &root);
+                }
+                //RR rotation
+                else{
+                    printf("RR rotation\n");
+                    RR(&(pp), &root);
+                }
             }
             pp = pp->parent;
         }
@@ -344,12 +360,50 @@ avl removeNode(avl root, int key){
         else{
             if(q->left == p){
                 q->left = p->left;
+                p -> left -> parent = q;
             }
             else{
                 q->right = p->left;
+                p -> left -> parent = q;
             }
         }
         pp = p -> parent;
+        //changing balance factors of all nodes
+        while(pp){
+            pp -> bf = height(pp -> left) - height(pp -> right);
+            //This means height of left subtree is more than right subtree
+            if(pp -> bf > 1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> left;
+                // //LL rotation
+                if(child -> bf >= 0){
+                    printf("LL rotation\n");
+                    LL(&(pp), &root);
+                }
+                //LR rotation
+                else{
+                    printf("LR rotation\n");
+                    LR(&(pp), &root);
+                }
+            }
+            else if(pp -> bf < -1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> right;
+                // //RL rotation
+                if(child -> bf >= 0){
+                    printf("RL rotation\n");
+                    RL(&(pp), &root);
+                }
+                //RR rotation
+                else{
+                    printf("RR rotation\n");
+                    RR(&(pp), &root);
+                }
+            }
+            pp = pp->parent;
+        }
         free(p);
         return root;
     }
@@ -362,12 +416,51 @@ avl removeNode(avl root, int key){
         else{
             if(q->left = p){
                 q->left = p->right;
+                p -> right -> parent = q; 
             }
             else{
                 q->right = p->right;
+                p -> right -> parent = q; 
             }
+
         }
         pp = p -> parent;
+        //changing balance factors of all nodes
+        while(pp){
+            pp -> bf = height(pp -> left) - height(pp -> right);
+            //This means height of left subtree is more than right subtree
+            if(pp -> bf > 1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> left;
+                // //LL rotation
+                if(child -> bf >= 0){
+                    printf("LL rotation\n");
+                    LL(&(pp), &root);
+                }
+                //LR rotation
+                else{
+                    printf("LR rotation\n");
+                    LR(&(pp), &root);
+                }
+            }
+            else if(pp -> bf < -1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> right;
+                // //RL rotation
+                if(child -> bf >= 0){
+                    printf("RL rotation\n");
+                    RL(&(pp), &root);
+                }
+                //RR rotation
+                else{
+                    printf("RR rotation\n");
+                    RR(&(pp), &root);
+                }
+            }
+            pp = pp->parent;
+        }
         free(p);
         return root;
     }
@@ -384,11 +477,49 @@ avl removeNode(avl root, int key){
         p->data = r->data;
         if(rp){
             rp ->right = r->left;
+            r -> left -> parent = rp;
         }
         else{
             p->left = r->left;
+            r -> left -> parent =p ;
         }
         pp = r -> parent;
+        //changing balance factors of all nodes
+        while(pp){
+            pp -> bf = height(pp -> left) - height(pp -> right);
+            //This means height of left subtree is more than right subtree
+            if(pp -> bf > 1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> left;
+                // //LL rotation
+                if(child -> bf >= 0){
+                    printf("LL rotation\n");
+                    LL(&(pp), &root);
+                }
+                //LR rotation
+                else{
+                    printf("LR rotation\n");
+                    LR(&(pp), &root);
+                }
+            }
+            else if(pp -> bf < -1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> right;
+                // //RL rotation
+                if(child -> bf >= 0){
+                    printf("RL rotation\n");
+                    RL(&(pp), &root);
+                }
+                //RR rotation
+                else{
+                    printf("RR rotation\n");
+                    RR(&(pp), &root);
+                }
+            }
+            pp = pp->parent;
+        }
         free(r);
         return root;
     }
