@@ -33,17 +33,21 @@ int Precedence_check(char ch){
 int infixToPostfix(char* exp){
     int i, k;
     stack* st = create(strlen(exp));
- 
+    char *ans;
+    ans = (char *)malloc(sizeof(char)*200);
     for (i = 0, k = -1; exp[i]; ++i)
     {
-        if (isOperand(exp[i]))
-            exp[++k] = exp[i];
-        else if (exp[i] == '(')
+        if(isOperand(exp[i])){
+                ans[++k] = exp[i];
+        }
+        else if(exp[i] == '(')
             push(st, exp[i]);
         else if (exp[i] == ')')
         {
-            while (!isEmpty(st) && peek(st) != '(')
-                exp[++k] = pop(st);
+            while (!isEmpty(st) && peek(st) != '('){
+                ans[++k] = pop(st);
+                ans[++k] = ' ';
+            }
             if (!isEmpty(st) && peek(st) != '(')
                 return -1;          
             else
@@ -52,16 +56,18 @@ int infixToPostfix(char* exp){
         else 
         {
             while (!isEmpty(st) &&
-                 Precedence_check(exp[i]) <= Precedence_check(peek(st)))
-                exp[++k] = pop(st);
+                 Precedence_check(exp[i]) <= Precedence_check(peek(st))){
+                ans[++k] = pop(st);
+                ans[++k] = ' ';
+                }
             push(st, exp[i]);
         }
- 
     }
-    while (!isEmpty(st))
-        exp[++k] = pop(st);
- 
-    exp[++k] = '\0';
-    printf("%s", exp);
+    while (!isEmpty(st)){
+        ans[++k] = pop(st);
+        ans[++k] = ' ';
+    }
+    ans[++k] = '\0';
+    printf("%s",ans);
     printf("\n");
 }

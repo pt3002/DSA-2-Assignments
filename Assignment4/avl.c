@@ -310,6 +310,28 @@ avl removeNode(avl root, int key){
             }
         }
         pp = p -> parent;
+        printf("%d--parent node of deleted node \n",pp -> data);
+
+        //changing balance factors of all nodes
+        while(pp){
+            pp -> bf = height(pp -> left) - height(pp -> right);
+            //This means height of left subtree is more than right subtree
+            if(pp -> bf > 1){
+                printf("Imbalanced Node - %d\n", pp -> data);
+                avl child;
+                child = pp -> left;
+                // //LR rotation
+                if(child -> bf >= 0){
+                    printf("LR rotation\n");
+                    LR(&(pp), &root);
+                }
+                // //LL rotation
+                // else{
+                //     LL(&(pp), &root);
+                // }
+            }
+            pp = pp->parent;
+        }
         free(p);
         return root;
     }
@@ -369,12 +391,6 @@ avl removeNode(avl root, int key){
         pp = r -> parent;
         free(r);
         return root;
-    }
-
-    while(pp){
-        pp -> bf = height(pp -> left) - height(pp -> right);
-        
-        pp = pp->parent;
     }
 
 }

@@ -74,7 +74,7 @@ int main(){
     node *imb;
 
     //Initialize avl tree
-    initAVL(&t1);
+     initAVL(&t1);
     while(1){
         char *month;
         month = (char *)malloc(sizeof(char)*20);
@@ -95,7 +95,7 @@ int main(){
     while(1){
         int i; 
         printf("Do you want to delete any node ? otherwise enter 0 - ");
-        scanf("%d",i);
+        scanf("%d",&i);
         if(i ==0){
             break;
         }
@@ -106,32 +106,34 @@ int main(){
     }
 
     //Add new node
-    // insertNode(&t1, 1);
-    // afterinsert(&t1, 1);
+    // insertNode(&t1, 50);
+    // afterinsert(&t1, 50);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 2);
-    // afterinsert(&t1, 2);
+    // insertNode(&t1, 40);
+    // afterinsert(&t1, 40);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 3);
-    // afterinsert(&t1, 3);
+    // insertNode(&t1, 60);
+    // afterinsert(&t1, 60);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 4);
-    // afterinsert(&t1, 4);
+    // insertNode(&t1, 30);
+    // afterinsert(&t1, 30);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 5);
-    // afterinsert(&t1, 5);
+    // insertNode(&t1, 45);
+    // afterinsert(&t1, 45);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 6);
-    // afterinsert(&t1, 6);
+    // insertNode(&t1, 55);
+    // afterinsert(&t1, 55);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
-    // insertNode(&t1, 7);
-    // afterinsert(&t1, 7);
+    // insertNode(&t1, 10);
+    // afterinsert(&t1, 10);
+    // inorder(t1);
+    // t1 = removeNode(t1, 55);
     // inorder(t1);
     // printf("|||||||||||||||||||||||||||||||||||||\n");
     // insertNode(&t1, 8);
