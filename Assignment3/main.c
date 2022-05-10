@@ -6,14 +6,16 @@
 #include <string.h>
 
 int main(){
-    char exp[] = "((1+2)*(3-(8/4)))";                     //Answer - 3
+    char exp[1000] = "((11+12)*(9-(28/4)))";                     //Answer - 3
     //char exp[] = "1+2+3+2";                               //Answer - 8
     //char exp[] = "2*1+3*2";                                 //Answer - 8
     printf("Postfix expression\n");
-    infixToPostfix(exp);
+    memcpy(exp,infixToPostfix(exp),strlen(infixToPostfix(exp))+1);
+    printf("%s\n",exp);
     printf("\n");
     et t1;
     init_tree(&t1, exp);
+    inorder(t1);
 
     //Validating that all nodes except leaves are operands
     int *leaves;

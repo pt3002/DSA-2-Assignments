@@ -2,5 +2,5 @@ int isOperand(char ch);
 
 int Precedence_check(char ch);
 
-int infixToPostfix(char* exp);
+char* infixToPostfix(char* exp);
 

@@ -7,15 +7,16 @@ int main(){
     bst t1;
     init_bst( &t1 );
 
-    insert_bst( &t1, 7);
+    insert_bst( &t1, 8);
     insert_bst( &t1, 20);
     insert_bst( &t1, 5);
-    insert_bst( &t1, 15);
-    insert_bst( &t1, 10);
-    insert_bst( &t1, 4);
-    insert_bst( &t1, 33);
-    insert_bst( &t1, 2);
-    insert_bst( &t1, 25);
+    // insert_bst( &t1, 15);
+    // insert_bst( &t1, 10);
+    // insert_bst( &t1, 3);
+    // insert_bst(&t1, 4);
+    // insert_bst( &t1, 33);
+    // insert_bst( &t1, 2);
+    // insert_bst( &t1, 25);
 
     inorder(t1);
 

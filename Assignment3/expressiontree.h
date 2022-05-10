@@ -1,7 +1,7 @@
 #include <stdlib.h>
 
 typedef struct node{
-    char o;
+    char *o;
     struct node *left;
     struct node *right;
 }node;

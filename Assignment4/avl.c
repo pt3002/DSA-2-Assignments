@@ -2,6 +2,45 @@
 #include<stdlib.h>
 #include "avl.h"
 
+char* month_day(int x){
+    if(x==1){
+        return "January";
+    }
+    else if(x==2){
+        return "February";
+    }
+    else if(x==3){
+        return "March";
+    }
+    else if(x==4){
+        return "April";
+    }
+    else if(x==5){
+        return "May";
+    }
+    else if(x==6){
+        return "June";
+    }
+    else if(x==7){
+        return "July";
+    }
+    else if(x==8){
+        return "August";
+    }
+    else if(x==9){
+        return "September";
+    }
+    else if(x==10){
+        return "October";
+    }
+    else if(x==11){
+        return "November";
+    }
+    else if(x==12){
+        return "December";
+    }
+}
+
 void initAVL(avl *t){
     *t = NULL;
     return;
@@ -181,7 +220,7 @@ void RL(node **imb, avl *t){
     }
     q -> left = r -> right;
     if(r-> right){
-        r -> right -> parent = p;
+        r -> right -> parent = q;
     }
     r -> left = p;
     r -> right = q;
@@ -238,10 +277,10 @@ void inorder(avl t){
     }
     inorder(t -> left);
     if(t->parent){
-        printf("%d - %d - %d\n", t->data, t->parent->data, t->bf);
+        printf("%s - %d - Parent = %d - Balance factor = %d\n",month_day(t->data), t->data, t->parent->data, t->bf);
     }
     else{
-        printf("%d - %d\n", t->data, t->bf);
+        printf("%s - %d - Balance Factor = %d\n",month_day(t->data),  t->data, t->bf);
     }
     inorder(t -> right);
 }
@@ -356,6 +395,7 @@ avl removeNode(avl root, int key){
     if(p->left != NULL && p->right == NULL){
         if(p == root){
             root = p->left;
+            p -> left -> parent = NULL;
         }
         else{
             if(q->left == p){
@@ -412,6 +452,7 @@ avl removeNode(avl root, int key){
     if(p->right != NULL && p->left == NULL){
         if(p == root){
             root = p->right;
+            p -> right -> parent = NULL;
         }
         else{
             if(q->left = p){
@@ -477,11 +518,17 @@ avl removeNode(avl root, int key){
         p->data = r->data;
         if(rp){
             rp ->right = r->left;
-            r -> left -> parent = rp;
+            if(r-> left){
+                r -> left -> parent = rp;
+            }
+            //r -> left -> parent = rp;
         }
         else{
             p->left = r->left;
-            r -> left -> parent =p ;
+            if(r->left){
+                r->left->parent = p;
+            }
+            //r -> left -> parent =p ;
         }
         pp = r -> parent;
         //changing balance factors of all nodes

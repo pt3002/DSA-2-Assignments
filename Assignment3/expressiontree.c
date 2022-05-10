@@ -10,15 +10,24 @@ void init_tree(et *t, char *exp){
     int i;
     etstack* ets = etscreateStack(strlen(exp));
     for(i=0; i<strlen(exp); i++){
-        if(isOperand(exp[i])){
+        int x =0;
+        char *a;
+        a = (char *)malloc(sizeof(char)*20);
+        while(isOperand(exp[i])){
+            a[x] = exp[i];
+            i++;
+            x++;
+        }
+        if(x>0){
             node *nn;
             nn = (node *)malloc(sizeof(node));
-            nn -> o = exp[i];
+            nn -> o = (char *)malloc(sizeof(char)*x);
+            memcpy(nn->o,a,x+1);
             nn -> left = NULL;
             nn -> right = NULL;
             etspush(ets,nn);
         }
-        else{
+        else if(exp[i]!=' '){
             node *nright;
             nright = (node *)malloc(sizeof(node));
             node *nleft;
@@ -29,7 +38,9 @@ void init_tree(et *t, char *exp){
             nn = (node *)malloc(sizeof(node));
             nn -> left = nleft;
             nn -> right = nright;
-            nn -> o = exp[i];
+            a[0] = exp[i];
+            nn -> o = (char *)malloc(sizeof(char));
+            memcpy(nn->o,a,strlen(a)+1);
             etspush(ets,nn);
         }
     }
@@ -42,7 +53,7 @@ void validation_leaves(et t, int *leaves, int *index){
         return;
     }
     if(t->left == NULL && t->right == NULL){
-        if(!isOperand(t->o)){
+        if(!isOperand(t->o[0])){
             leaves[*index] = 0;
             *index+=1;
         }
@@ -61,7 +72,7 @@ void validation_nodes(et t, int *nodes, int *k){
         return;
     }
     if(t->left != NULL || t->right != NULL){
-        if(isOperand(t->o)){
+        if(isOperand(t->o[0])){
             nodes[*k] = 0;
             *k+=1;
         }
@@ -80,7 +91,7 @@ void inorder(et t){
         return;
     }
     inorder(t->left);
-    printf("%c ",t->o);
+    printf("%s ",t->o);
     inorder(t->right);
 }
 
@@ -89,24 +100,31 @@ void compute(et *t){
         return;
     }
     if((*t)->left && (*t)->right && ((*t)->left->left==NULL && (*t)->left->right==NULL) && ((*t)->right->left==NULL && (*t)->right->right==NULL)){
-        int a = (*t)->left->o - '0';
-        int b = (*t)->right->o - '0';
+        int a = atoi((*t)->left->o);
+        int b = atoi((*t)->right->o);
         int c;
-        if((*t)->o=='+'){
+        if((*t)->o[0]=='+'){
             c = a+b;
         }
-        if((*t)->o=='-'){
+        if((*t)->o[0]=='-'){
             c = a-b;
         }
-        if((*t)->o=='*'){
+        if((*t)->o[0]=='*'){
             c = a*b;
         }
-        if((*t)->o=='/'){
+        if((*t)->o[0]=='/'){
             c = a/b;
         }
         (*t) -> left = NULL;
         (*t) -> right = NULL;
-        (*t) -> o = '0' + c;
+        (*t) -> o = (char *)malloc(sizeof(char)*2);
+        (*t) -> o[0] = '0' + c%10;
+        c = c - c%10;
+        c = c/10;
+        if(c){
+            (*t) -> o[1] = '0'+c%10;
+        }
+        int j = 0;
         printf("\n");
         return;
     }

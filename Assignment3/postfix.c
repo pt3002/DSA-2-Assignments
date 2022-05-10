@@ -30,7 +30,7 @@ int Precedence_check(char ch){
     return -1;
 }
 
-int infixToPostfix(char* exp){
+char* infixToPostfix(char* exp){
     int i, k;
     stack* st = create(strlen(exp));
     char *ans;
@@ -39,6 +39,10 @@ int infixToPostfix(char* exp){
     {
         if(isOperand(exp[i])){
                 ans[++k] = exp[i];
+                if((i+1)<strlen(exp) && isOperand(exp[i+1])){
+                    ans[++k] = exp[i+1];
+                    ++i;
+                }
                 ans[++k] = ' ';
         }
         else if(exp[i] == '(')
@@ -50,7 +54,7 @@ int infixToPostfix(char* exp){
                 ans[++k] = ' ';
             }
             if (!isEmpty(st) && peek(st) != '(')
-                return -1;          
+                return "";          
             else
                 pop(st);
         }
@@ -69,6 +73,5 @@ int infixToPostfix(char* exp){
         ans[++k] = ' ';
     }
     ans[++k] = '\0';
-    printf("%s",ans);
-    printf("\n");
+    return ans;
 }
