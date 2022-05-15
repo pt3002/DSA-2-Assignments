@@ -1,45 +1,46 @@
 #include<stdio.h>
 #include<stdlib.h>
 #include "avl.h"
+#include <string.h>
 
-char* month_day(int x){
-    if(x==1){
-        return "January";
-    }
-    else if(x==2){
-        return "February";
-    }
-    else if(x==3){
-        return "March";
-    }
-    else if(x==4){
-        return "April";
-    }
-    else if(x==5){
-        return "May";
-    }
-    else if(x==6){
-        return "June";
-    }
-    else if(x==7){
-        return "July";
-    }
-    else if(x==8){
-        return "August";
-    }
-    else if(x==9){
-        return "September";
-    }
-    else if(x==10){
-        return "October";
-    }
-    else if(x==11){
-        return "November";
-    }
-    else if(x==12){
-        return "December";
-    }
-}
+// char* month_day(int x){
+//     if(x==1){
+//         return "January";
+//     }
+//     else if(x==2){
+//         return "February";
+//     }
+//     else if(x==3){
+//         return "March";
+//     }
+//     else if(x==4){
+//         return "April";
+//     }
+//     else if(x==5){
+//         return "May";
+//     }
+//     else if(x==6){
+//         return "June";
+//     }
+//     else if(x==7){
+//         return "July";
+//     }
+//     else if(x==8){
+//         return "August";
+//     }
+//     else if(x==9){
+//         return "September";
+//     }
+//     else if(x==10){
+//         return "October";
+//     }
+//     else if(x==11){
+//         return "November";
+//     }
+//     else if(x==12){
+//         return "December";
+//     }
+// }
 
 void initAVL(avl *t){
     *t = NULL;
@@ -58,12 +59,13 @@ int height(avl t){
     return 1+r;
 }
 
-void insertNode(avl *t, int data){
+void insertNode(avl *t, char* data){
     node *nn;
     nn = (node *) malloc(sizeof(node));
     nn -> left = NULL;
     nn -> right = NULL;
-    nn -> data = data;
+    nn -> data = (char *)malloc(sizeof(data));
+    memcpy(nn -> data,data,sizeof(data));
     nn -> parent = NULL;
     nn -> bf = 0;
      
@@ -73,13 +75,13 @@ void insertNode(avl *t, int data){
         return;
     }
 
-    if((*t) -> data > data){
+    if(strcmp((*t) -> data,data)>0){
         insertNode(&((*t) -> left), data);
         (*t) -> left -> parent = *t;
         (*t) -> bf = height((*t) -> left) - height((*t) -> right);
     }
 
-    if((*t) -> data < data){
+    if(strcmp((*t) -> data,data)<0){
         insertNode(&((*t) -> right), data);
         (*t) -> right -> parent = *t;
         (*t) -> bf = height((*t) -> left) - height((*t) -> right);
@@ -88,17 +90,17 @@ void insertNode(avl *t, int data){
     return;
 }
 
-node* adjust(avl *t, int data){
+node* adjust(avl *t, char* data){
     node *p;
     p = *t;
-    while(p && p -> data != data){
-        if(p ->data == data){
+    while(p && strcmp(p -> data,data)!=0){
+        if(strcmp(p -> data,data)==0){
             break;
         }
-        if(p -> data > data){
+        if(strcmp(p -> data,data)>0){
             p = p->left;
         }
-        if(p -> data < data){
+        if(strcmp(p -> data,data)<0){
             p = p->right;
         }
     }
@@ -113,16 +115,16 @@ node* adjust(avl *t, int data){
     return NULL;
 }
 
-char* rotationtype(node *imb, int data){
+char* rotationtype(node *imb, char* data){
     char *ans;
     ans = (char *)malloc(sizeof(char)*2);
     int i = 0;
     while(i<2){
-        if(data > imb -> data){
+        if(strcmp(data,imb -> data) > 0){
             ans[i] = 'R';
             imb = imb -> right;
         }
-        else if(data < imb -> data){
+        else if(strcmp(data,imb -> data) < 0){
             ans[i] = 'L';
             imb = imb -> left;
         }
@@ -277,10 +279,10 @@ void inorder(avl t){
     }
     inorder(t -> left);
     if(t->parent){
-        printf("%s - %d - Parent = %d - Balance factor = %d\n",month_day(t->data), t->data, t->parent->data, t->bf);
+        printf("%s - Parent = %s - Balance factor = %d\n",t->data,t->parent->data, t->bf);
     }
     else{
-        printf("%s - %d - Balance Factor = %d\n",month_day(t->data),  t->data, t->bf);
+        printf("%s - Balance Factor = %d\n",t->data, t->bf);
     }
     inorder(t -> right);
 }
@@ -300,7 +302,7 @@ void Destroy_Tree(avl *t){
 }
 
 //Remove node from a tree
-avl removeNode(avl root, int key){
+avl removeNode(avl root, char *key){
     avl p;    //Pointer for finding the node to be deleted
     avl q;    //Pointer to find its parent
     avl r;
@@ -315,13 +317,13 @@ avl removeNode(avl root, int key){
 
     //Locating the node to be deleted and its parent
     while(p){
-        if(p->data == key){
+        if(strcmp(p->data,key) == 0){
             break;
         }
 
         q=p;
 
-        if(p->data > key){
+        if(strcmp(p->data,key) > 0){
             p = p->left;
         }
 
@@ -332,6 +334,7 @@ avl removeNode(avl root, int key){
 
     //If key to be deleted is not found
     if(!p){
+        printf("Sorry key not found\n");
         return root;
     }
 
@@ -349,14 +352,16 @@ avl removeNode(avl root, int key){
             }
         }
         pp = p -> parent;
-        printf("%d--parent node of deleted node \n",pp -> data);
+        if(pp){
+            printf("%s--parent node of deleted node \n",pp -> data);
+        }
 
         //changing balance factors of all nodes
         while(pp){
             pp -> bf = height(pp -> left) - height(pp -> right);
             //This means height of left subtree is more than right subtree
             if(pp -> bf > 1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> left;
                 // //LL rotation
@@ -371,7 +376,7 @@ avl removeNode(avl root, int key){
                 }
             }
             else if(pp -> bf < -1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> right;
                 // //RL rotation
@@ -413,7 +418,7 @@ avl removeNode(avl root, int key){
             pp -> bf = height(pp -> left) - height(pp -> right);
             //This means height of left subtree is more than right subtree
             if(pp -> bf > 1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> left;
                 // //LL rotation
@@ -428,7 +433,7 @@ avl removeNode(avl root, int key){
                 }
             }
             else if(pp -> bf < -1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> right;
                 // //RL rotation
@@ -471,7 +476,7 @@ avl removeNode(avl root, int key){
             pp -> bf = height(pp -> left) - height(pp -> right);
             //This means height of left subtree is more than right subtree
             if(pp -> bf > 1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> left;
                 // //LL rotation
@@ -486,7 +491,7 @@ avl removeNode(avl root, int key){
                 }
             }
             else if(pp -> bf < -1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> right;
                 // //RL rotation
@@ -536,7 +541,7 @@ avl removeNode(avl root, int key){
             pp -> bf = height(pp -> left) - height(pp -> right);
             //This means height of left subtree is more than right subtree
             if(pp -> bf > 1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> left;
                 // //LL rotation
@@ -551,7 +556,7 @@ avl removeNode(avl root, int key){
                 }
             }
             else if(pp -> bf < -1){
-                printf("Imbalanced Node - %d\n", pp -> data);
+                printf("Imbalanced Node - %s\n", pp -> data);
                 avl child;
                 child = pp -> right;
                 // //RL rotation
