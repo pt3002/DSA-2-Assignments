@@ -8,9 +8,14 @@ int main(){
     FILE *fptr;
 
     int *A;
-    A = (int *)malloc(sizeof(int) * 40);
+    A = (int *)malloc(sizeof(int) * 100);
 
-    fptr = fopen("number.txt", "r");
+    char *s;
+    s = (char *) malloc(sizeof(char)*100);
+    printf("Enter filename - ");
+    scanf("%s", s);
+
+    fptr = fopen(s, "r");
     if (fptr == NULL) {
         printf("no such file.");
         return 0;
@@ -24,10 +29,10 @@ int main(){
     }
     fclose(fptr);
 
-    init_heap(&h1, 40);
+    init_heap(&h1, 100);
 
     printf("\n");
-    for(int i=0; i<40; i++){
+    for(int i=0; i<100; i++){
         insert_heap(&h1, A[i]);
     }
     i = 0;
