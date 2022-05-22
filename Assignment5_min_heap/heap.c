@@ -10,7 +10,7 @@ void init_heap(heap *h, int s){
     return ;
 }
 
-// Max heap
+// Min heap
 void insert_heap(heap *h, int key){
     //heap full condition
     if(h -> rear == h -> size - 1){
