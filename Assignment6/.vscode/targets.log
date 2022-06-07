@@ -8,7 +8,7 @@ make: *** No rule to make target 'all'.  Stop.
 # This is free software: you are free to change and redistribute it.
 # There is NO WARRANTY, to the extent permitted by law.
 
-# Make data base, printed on Mon Jun  6 12:34:35 2022
+# Make data base, printed on Tue Jun  7 07:36:32 2022
 
 # Variables
 
@@ -43,7 +43,7 @@ GDMSESSION = ubuntu
 # environment
 XMODIFIERS = @im=ibus
 # makefile
-CURDIR := /home/prerna2002/Desktop/PRERNA/DSA_Assgn/DSA-2-Assignments
+CURDIR := /home/prerna2002/Desktop/PRERNA/DSA_Assgn/DSA-2-Assignments/Assignment6
 # makefile
 SHELL = /bin/sh
 # environment
@@ -51,15 +51,15 @@ SNAP_DATA = /var/snap/code/97
 # environment
 VSCODE_NLS_CONFIG = {"locale":"en-gb","availableLanguages":{},"_languagePackSupport":true}
 # environment
-JOURNAL_STREAM = 8:43998
+JOURNAL_STREAM = 8:45692
 # environment
 XDG_CONFIG_DIRS = /etc/xdg/xdg-ubuntu:/etc/xdg
 # environment
 SNAP_INSTANCE_NAME = code
 # environment
 SNAP_ARCH = amd64
-# makefile
-MAKEFILE_LIST := 
+# makefile (from 'Makefile', line 1)
+MAKEFILE_LIST :=  Makefile
 # automatic
 @F = $(notdir $@)
 # environment
@@ -75,7 +75,7 @@ VSCODE_VERBOSE_LOGGING = true
 # environment
 _ = /snap/code/97/usr/share/code/code
 # environment
-MANAGERPID = 1428
+MANAGERPID = 1449
 # environment
 LESSOPEN = | /usr/bin/lesspipe %s
 # environment
@@ -89,7 +89,7 @@ PATH = /home/prerna2002/.local/bin:/home/prerna2002/.local/bin:/usr/local/sbin:/
 # environment
 GPG_AGENT_INFO = /run/user/1000/gnupg/S.gpg-agent:0:1
 # environment
-SESSION_MANAGER = local/pretul:@/tmp/.ICE-unix/1643,unix/pretul:/tmp/.ICE-unix/1643
+SESSION_MANAGER = local/pretul:@/tmp/.ICE-unix/1664,unix/pretul:/tmp/.ICE-unix/1664
 # environment
 XDG_RUNTIME_DIR = /run/user/1000
 # environment
@@ -107,7 +107,7 @@ DISABLE_WAYLAND = 1
 # environment
 ELECTRON_RUN_AS_NODE = 1
 # environment
-INVOCATION_ID = 201ce293f3534787bde66c3310c56948
+INVOCATION_ID = 9945aa980ea24863939cae33fc91a9f6
 # environment
 GDK_PIXBUF_MODULEDIR = /snap/code/97/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
@@ -119,7 +119,7 @@ XDG_SESSION_DESKTOP = ubuntu
 # environment
 SSH_AUTH_SOCK = /run/user/1000/keyring/ssh
 # environment
-GIO_LAUNCHED_DESKTOP_FILE_PID = 7246
+GIO_LAUNCHED_DESKTOP_FILE_PID = 3193
 # automatic
 %F = $(notdir $%)
 # environment
@@ -129,11 +129,11 @@ VSCODE_PIPE_LOGGING = true
 # environment
 SNAP_INSTANCE_KEY = 
 # environment
-PWD = /home/prerna2002/Desktop/PRERNA/DSA_Assgn/DSA-2-Assignments
+PWD = /home/prerna2002/Desktop/PRERNA/DSA_Assgn/DSA-2-Assignments/Assignment6
 # default
 .LOADED := 
 # environment
-SSH_AGENT_PID = 1605
+SSH_AGENT_PID = 1626
 # environment
 ORIGINAL_XDG_CURRENT_DESKTOP = ubuntu:GNOME
 # environment
@@ -151,7 +151,7 @@ VSCODE_CODE_CACHE_PATH = /home/prerna2002/.config/Code/CachedData/c3511e6c69bb39
 # environment
 LOGNAME = prerna2002
 # environment
-APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = true
+APPLICATION_INSIGHTS_NO_DIAGNOSTIC_CHANNEL = 1
 # environment
 SNAP_LIBRARY_PATH = /var/lib/snapd/lib/gl:/var/lib/snapd/lib/gl32:/var/lib/snapd/void
 # environment
@@ -183,7 +183,7 @@ SHLVL = 0
 # environment
 GNOME_SHELL_SESSION_MODE = ubuntu
 # environment
-VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-a79b8d4e-bcf8-4f41-ab43-3dc3bc909cd0.sock
+VSCODE_IPC_HOOK_EXTHOST = /run/user/1000/vscode-ipc-f993b047-f444-4ffe-8b28-d0de74b54de8.sock
 # default
 MAKE_VERSION := 4.2.1
 # environment
@@ -191,7 +191,7 @@ USER = prerna2002
 # environment
 SNAP_REVISION = 97
 # makefile
-.DEFAULT_GOAL := 
+.DEFAULT_GOAL := graph
 # environment
 XDG_CURRENT_DESKTOP = Unity
 # automatic
@@ -253,9 +253,9 @@ GJS_DEBUG_OUTPUT = stderr
 # environment
 LANG = C
 # environment
-VSCODE_PID = 7297
+VSCODE_PID = 4892
 # variable set hash-table stats:
-# Load=121/1024=12%, Rehash=0, Collisions=18/143=13%
+# Load=121/1024=12%, Rehash=0, Collisions=18/146=12%
 
 # Pattern-specific Variable Values
 
@@ -263,9 +263,9 @@ VSCODE_PID = 7297
 
 # Directories
 
-# . (device 2055, inode 1574204): 18 files, no impossibilities.
+# . (device 2055, inode 2098673): 16 files, no impossibilities.
 
-# 18 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -280,19 +280,44 @@ all:
 #  File does not exist.
 #  File has not been updated.
 
+queue.o: queue.c queue.h
+ 
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 11):
+	gcc -c queue.c
+
+# Not a target:
+main.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+graph.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
 # Not a target:
 Makefile:
 #  Implicit rule search has been done.
-#  File does not exist.
+#  Last modified 2022-06-07 07:32:22.471139512
 #  File has been updated.
-#  Failed to be updated.
+#  Successfully updated.
 
 # Not a target:
-makefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+graph.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+# Not a target:
+queue.c:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
 
 # Not a target:
 .DEFAULT:
@@ -301,27 +326,46 @@ makefile:
 #  File has not been updated.
 
 # Not a target:
- 
-GNUmakefile:
-#  Implicit rule search has been done.
-#  File does not exist.
-#  File has been updated.
-#  Failed to be updated.
+queue.h:
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+
+graph: main.o graph.o queue.o
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 2):
+	gcc -o graph main.o graph.o queue.o
+
+main.o: main.c
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 5):
+	gcc -c main.c
+
+graph.o: graph.c graph.h
+#  Implicit rule search has not been done.
+#  Modification time never checked.
+#  File has not been updated.
+#  recipe to execute (from 'Makefile', line 8):
+	gcc -c graph.c
 
 # files hash-table stats:
-# Load=6/1024=1%, Rehash=0, Collisions=0/15=0%
+# Load=13/1024=1%, Rehash=0, Collisions=1/34=3%
 # VPATH Search Paths
 
 # No 'vpath' search paths.
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 26 / storage = 482 B / avg = 18 B
-# current buf: size = 8162 B / used = 482 B / count = 26 / avg = 18 B
+# strcache buffers: 1 (0) / strings = 21 / storage = 170 B / avg = 8 B
+# current buf: size = 8162 B / used = 170 B / count = 21 / avg = 8 B
 
-# strcache performance: lookups = 29 / hit rate = 10%
+# strcache performance: lookups = 41 / hit rate = 48%
 # hash-table stats:
-# Load=26/8192=0%, Rehash=0, Collisions=1/29=3%
-# Finished Make data base on Mon Jun  6 12:34:35 2022
+# Load=21/8192=0%, Rehash=0, Collisions=1/41=2%
+# Finished Make data base on Tue Jun  7 07:36:32 2022
 
  
