@@ -98,12 +98,50 @@ void in_out_degree(graph *g){
 	int check = 0;
 	int *A;
 	A = (int *)malloc(sizeof(int)*(2*(g ->n)));
-	int j = 0;
+	int k = 0;
 	for(i = 0; i < g -> n; i++){
 		int in = 0;
 		int out = 0;
 		edge *temp;
-		j += 2;
+                temp = g -> A[i];
+                while(temp){
+                       out ++;
+                       temp = temp -> next;
+                }
+                int j;
+                for(j = 0; j < g -> n; j++){
+                      temp = g -> A[j];
+                      while(temp){
+                           if(temp -> data == i){
+                                 in ++;
+                           }
+                           temp = temp -> next;
+                      }
+                }
+                if(in != out){
+                     check = 1;
+                }
+                
+	        A[k] = in;
+                k += 1;
+                A[k] = out;
+                k += 1;
 	}
+        if(check == 0){
+                printf("\nUndirected Graph\n");
+                int x;
+                for(x = 0; x < g -> n; x++){
+                     printf("For vertex %d the degree is %d\n",x,A[2*x];
+                }
+        }
+        else{
+               printf("\nDirected Graph\n");
+               int x;
+               int t = 0;
+               for(x = 0; x < (2* g -> n);x+=2){
+                   printf("For vertex %d the in degree is %d and out degree is %d\n",t,A[x],A[x+1];
+                   t += 1;
+               }
+        }
 }
 
