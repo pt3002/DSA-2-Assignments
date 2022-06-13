@@ -16,3 +16,4 @@ void display();
 void insert();
 void delete();
 void search();
+void stream_count();
