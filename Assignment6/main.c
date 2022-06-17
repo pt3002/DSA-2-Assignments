@@ -65,5 +65,6 @@ int main(int argc, char *argv[]){
     dfs(&g,0,visited);
     printf("\n");
     prims(&g, 0);
+    Dijkstra(&g,0);
     return 0;
 }

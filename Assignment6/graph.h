@@ -18,3 +18,4 @@ void traverse(graph g);
 void bfs(graph *g, int s);
 void dfs(graph *g, int s, int *visited);
 void prims(graph *g, int s);
+void Dijkstra(graph *g, int s);

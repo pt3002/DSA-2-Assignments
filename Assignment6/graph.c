@@ -3,6 +3,7 @@
 #include "graph.h"
 #include "queue.h"
 #include "limits.h"
+#define INFINITY 9999
 
 void init_graph(graph *g,int n){
     g -> A = (node **) malloc( (sizeof(node **) * n));
@@ -188,5 +189,67 @@ void prims(graph *g, int s){
 		no_of_edges ++;
 	}
 	return;
+}
+
+void Dijkstra(graph *g, int s){
+	int cost[g->n][g->n];
+	int dist[g->n];
+	int pred[g->n];
+	int visited[g->n];
+	int count, mindistance, nextnode, i, j;
+
+	//Creating cost matrix
+	for(i= 0 ; i<g->n; i++){
+		node *temp;
+		temp = g -> A[i];
+		for(j = 0 ;j < g ->n; j++){
+			if(temp->data==j){
+				cost[i][j] = temp -> weight;
+				temp = temp -> next;
+			}
+			else{
+				cost[i][j] = INFINITY;
+			}
+		}
+	}
+
+	for(i = 0; i < g->n; i++){
+		dist[i] = cost[s][i];
+		pred[i]  = s;
+		visited[i] = 0;
+	}
+
+	dist[s] = 0;
+	visited[s] = 1;
+	count = 1;
+
+	while(count < g->n - 1){
+		mindistance = INFINITY;
+		for(i = 0; i < g->n; i++){
+			if(dist[i] < mindistance && !visited[i]){
+				mindistance = dist[i];
+				nextnode = i;
+			}
+		}
+
+		visited[nextnode] = 1;
+		for(i = 0; i < g->n;i++){
+			if(!visited[i]){
+				if(mindistance+cost[nextnode][i] < dist[i]){
+					dist[i] = mindistance + cost[nextnode][i];
+					pred[i] = nextnode;
+				}
+			}
+		}
+
+		count++;
+	}
+
+	//Printing the distance
+	for(i = 0; i<g->n; i++){
+		if(i != s){
+			printf("\nDistance from source %d to destination %d",i,dist[i]);
+		}
+	}
 }
 
