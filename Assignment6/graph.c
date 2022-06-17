@@ -2,9 +2,10 @@
 #include <stdlib.h>
 #include "graph.h"
 #include "queue.h"
+#include "limits.h"
 
 void init_graph(graph *g,int n){
-    g -> A = (edge **) malloc( (sizeof(edge **) * n));
+    g -> A = (node **) malloc( (sizeof(node **) * n));
     g -> n = n;
     int i;
     for( i = 0 ; i < n; i++){
@@ -17,11 +18,11 @@ void linked_graph(int *A, int i, graph *g){
 
 	int j = 0;
 	while( j < g -> n){
-		edge *back;
+		node *back;
 		if(A[j]!=0){
 			//printf("%d - %d :",j,A[j]);
-			edge *new;
-			new = (edge *) malloc(sizeof(edge));
+			node *new;
+			new = (node *) malloc(sizeof(node));
 			new -> data = j;
 			new -> weight = A[j];
 			new -> next = NULL;
@@ -43,7 +44,7 @@ void linked_graph(int *A, int i, graph *g){
 void traverse(graph g){
 	int i;
 	for(i = 0; i < g.n; i++){
-		edge *temp;
+		node *temp;
 		temp = g.A[i];
 		while(temp){
 			printf("%d - %d\n", temp -> data, temp -> weight);
@@ -61,13 +62,13 @@ void bfs(graph *g, int s){
 	enqueue(Q1, s);
 	visited[s] = 1;
 	//printf("%d, ",s);
-	edge *temp;
+	node *temp;
 	temp = g -> A[s];
 
 	while(!isEmpty(Q1)){
 		int current = dequeue(Q1);
 		printf("%d, ",current);
-		edge *temp = g -> A[current];
+		node *temp = g -> A[current];
 		while(temp){
 				int i = temp -> data;
 				if(!visited[temp->data]){
@@ -80,7 +81,7 @@ void bfs(graph *g, int s){
 }
 
 void dfs(graph *g, int s, int *visited){
-	edge *temp;
+	node *temp;
 	temp = g -> A[s];
 	visited[s] = 1;
 	printf("%d, ",s);
@@ -102,7 +103,7 @@ void in_out_degree(graph *g){
 	for(i = 0; i < g -> n; i++){
 		int in = 0;
 		int out = 0;
-		edge *temp;
+		node *temp;
                 temp = g -> A[i];
                 while(temp){
                        out ++;
@@ -131,7 +132,7 @@ void in_out_degree(graph *g){
                 printf("\nUndirected Graph\n");
                 int x;
                 for(x = 0; x < g -> n; x++){
-                     printf("For vertex %d the degree is %d\n",x,A[2*x];
+                     printf("For vertex %d the degree is %d\n",x,A[2*x]);
                 }
         }
         else{
@@ -139,9 +140,53 @@ void in_out_degree(graph *g){
                int x;
                int t = 0;
                for(x = 0; x < (2* g -> n);x+=2){
-                   printf("For vertex %d the in degree is %d and out degree is %d\n",t,A[x],A[x+1];
+                   printf("For vertex %d the in degree is %d and out degree is %d\n",t,A[x],A[x+1]);
                    t += 1;
                }
         }
+}
+
+void prims(graph *g, int s){
+	int no_of_edges = 0;
+	int * selected;
+	selected = (int *) malloc(sizeof(int)*(g -> n));
+
+	int i;
+	for(i = 0; i<g -> n; i++){
+		selected[i] = 0;
+	}
+
+	selected[s] = 1;
+
+	int total_dist = 0;
+
+	while(no_of_edges < g -> n -1){
+		int min_edge = INT_MAX;
+		int start = 0;
+		int end = 0;
+		int dist = 0;
+
+		for(i = 0; i < g-> n ; i++){
+			node *temp;
+			if(selected[i]){
+				temp  = g ->A[i];
+				while(temp){
+					if(!selected[temp -> data]){
+						if(min_edge > temp -> weight){
+							start = i;
+							end = temp -> data;
+							dist = temp ->weight;
+						}
+					}
+					temp  = temp -> next;
+				}
+			}
+		}
+		
+		printf("From : %d - To : %d - Distance : %d\n",start, end, dist);
+		selected[end] = 1;
+		no_of_edges ++;
+	}
+	return;
 }
 

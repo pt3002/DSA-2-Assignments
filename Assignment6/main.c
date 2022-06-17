@@ -63,5 +63,7 @@ int main(int argc, char *argv[]){
     printf("\nDFS TRAVERSAL\n");
     int *visited = calloc(g.n, sizeof(int));
     dfs(&g,0,visited);
+    printf("\n");
+    prims(&g, 0);
     return 0;
 }
