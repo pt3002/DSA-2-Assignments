@@ -203,7 +203,7 @@ void Dijkstra(graph *g, int s){
 		node *temp;
 		temp = g -> A[i];
 		for(j = 0 ;j < g ->n; j++){
-			if(temp->data==j){
+			if(temp && temp->data==j){
 				cost[i][j] = temp -> weight;
 				temp = temp -> next;
 			}
@@ -212,6 +212,13 @@ void Dijkstra(graph *g, int s){
 			}
 		}
 	}
+
+	// for(i = 0; i< g->n; i++){
+	// 	for(j = 0; j < g->n ; j++){
+	// 		printf("%d-",cost[i][j]);
+	// 	}
+	// 	printf("\n");
+	// }
 
 	for(i = 0; i < g->n; i++){
 		dist[i] = cost[s][i];
@@ -248,7 +255,7 @@ void Dijkstra(graph *g, int s){
 	//Printing the distance
 	for(i = 0; i<g->n; i++){
 		if(i != s){
-			printf("\nDistance from source %d to destination %d",i,dist[i]);
+			printf("\nDistance from source to destination %d : %d",i,dist[i]);
 		}
 	}
 }
