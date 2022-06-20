@@ -1,0 +1,238 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+typedef struct edge{
+    int start;
+    int to;
+    int weight;
+}edge;
+
+typedef struct heap{
+    edge* A;
+    int rear;
+    int size;
+}heap;
+
+typedef struct graph{
+    int vertices;
+    int* *A;
+}graph;
+
+void heapify_del(heap *h);
+void init_heap(heap *h, int s);
+void insert_heap(heap *h, edge e);
+void heapify(heap *h);
+edge del_heap(heap *h);
+void heapify_del(heap *h);
+
+void init_graph(graph *g, int n);
+int findparent(int *A, int key, int v);
+void swapparent(int i, int j, int *A, int v);
+
+void init_heap(heap *h, int s){
+    h -> size = s;
+    h -> rear = -1;
+    h -> A = (edge *) malloc(sizeof(edge)*s);
+    return;
+}
+
+void insert_heap(heap *h, edge e){
+    if(h -> rear == h -> size - 1){
+        printf("Heap is full\n");
+        return;
+    }
+    h -> rear ++;
+    h -> A[h -> rear] = e;
+    if(h -> rear != 0){
+        int parent;
+        parent = (h -> rear - 1)/2;
+        if((h -> A[parent]).weight <= (h-> A[h -> rear]).weight){
+            return;
+        }
+        heapify(h);
+    }
+    return;
+}
+
+void heapify(heap *h){
+    int i = h -> rear;
+    while(i >= 0){
+        int parent;
+        parent = (i - 1)/2;
+        if(parent>=0 && ((h -> A[parent]).weight > (h-> A[i]).weight)){
+            edge temp;
+            temp = h -> A[parent];
+            h -> A[parent] = h -> A[i];
+            h -> A[i] = temp;
+            i = parent;
+        }
+        else{
+            return;
+        }
+    }
+    return;
+}
+
+edge del_heap(heap *h){
+    if(h -> rear==-1){
+        printf("Heap is empty\n");
+    }
+    edge root;
+    root = h -> A[0];
+    h -> A[0] = h -> A[h -> rear];
+    h -> rear --;
+    heapify_del(h);
+    return root;
+}
+
+void heapify_del(heap *h){
+    int i = 0;
+    while(i<=h->rear){
+        int left = 2*i + 1;
+        int right = 2*i +2;
+        if((h->A[i]).weight <= (h->A[left]).weight && (h->A[i]).weight <= (h->A[right]).weight){
+            return;
+        }
+        if(left<=h->rear && right <= h-> rear){
+                edge temp;
+                if((h->A[left]).weight < (h->A[right]).weight){
+                    temp = h->A[left];
+                    h -> A[left] = h -> A[i];
+                    h -> A[i] = temp;
+                    i = left;
+                }
+                else{
+                    temp = h->A[right];
+                    h -> A[right] = h -> A[i];
+                    h -> A[i] = temp;
+                    i = right;
+                }
+        }
+        else if(left <= h-> rear){
+            if((h->A[left]).weight < (h->A[i]).weight){
+                edge temp;
+                temp = h->A[left];
+                h -> A[left] = h -> A[i];
+                h -> A[i] = temp;
+                i = left;
+            }
+            else{
+                return;
+            }
+        }
+        else{
+            return;
+        }
+    }
+    return;
+}
+
+void print_heap(heap h){
+    int i;
+    for(i = 0; i <= h.rear; i++){
+        printf("Start : %d --- To : %d --- Weight : %d --- \n",(h.A[i]).start,(h.A[i]).to,(h.A[i]).weight);
+    }
+    return;
+}
+
+void init_graph(graph *g, int n){
+    g -> vertices = n;
+    g -> A = (int **)malloc(sizeof(int *)*n);
+    int i; 
+    for(i = 0; i < n ; i++){
+        g -> A[i] = (int *)malloc(sizeof(int)*n);
+    }
+    return;
+}
+
+int findparent(int *A, int key, int v){
+    int i;
+    for(i = 0 ; i<v; i++){
+        if(i == key){
+            return A[i];
+        }
+    }
+}
+
+void swapparent(int i, int j, int *A, int v){
+    int smaller;
+    int larger;
+    if(i < j){
+        smaller = i;
+        larger = j;
+    }
+    else{
+        smaller = j;
+        larger = i;
+    }
+    int x;
+    for(x = 0; x < v; x++){
+        if(A[x] == larger){
+            A[x] = smaller;
+        }
+    }
+    return;
+}
+
+void printarray(int *A){
+    int i;
+    for(i = 0 ;i<9;i++){
+        printf("%d-",A[i]);
+    }
+    printf("\n");
+}
+
+int main(){
+    int A[9][9] = {{0,4,0,0,0,0,0,8,0},
+                 {0,0,8,0,0,0,0,11,0},
+                 {0,0,0,7,0,4,0,0,0},
+                 {0,0,0,0,9,14,0,0,0},
+                 {0,0,0,0,0,0,0,0,0},
+                 {0,0,0,0,10,0,0,0,0},
+                 {0,0,0,0,0,2,0,0,0},
+                 {0,0,0,0,0,0,1,0,7},
+                 {0,0,2,0,0,0,6,0,0}};
+    heap h;
+    init_heap(&h,100);
+    int i;
+    int j;
+    for(i = 0; i<9; i++){
+        for(j = 0; j<9; j++){
+            if(A[i][j]!=0){
+                edge e;
+                e.start = i;
+                e.to = j;
+                e.weight = A[i][j];
+                insert_heap(&h,e);
+            }
+        }
+    }
+    
+    int* unionarray;
+    unionarray = (int *)malloc(sizeof(int)*(9));
+    for(i = 0; i < 9; i++){
+        unionarray[i] = i;
+    }
+
+    int edge_count = 0;
+    //print_heap(h);
+    while(edge_count<8){
+        edge e;
+        e = del_heap(&h);
+        int from = findparent(unionarray,e.start,9);
+        int to = findparent(unionarray,e.to,9);
+        if(from==to){
+            continue;
+        }
+        else{
+            swapparent(from,to,unionarray,9);
+            //printf("From - %d, To - %d\n",from,to);
+            printf("%d - %d - weight : %d\n",e.start,e.to,e.weight);
+            printf("\n");
+            //printarray(unionarray);
+            printf("\n\n");
+            edge_count++;
+        }
+    }
+    return 0;
+}
